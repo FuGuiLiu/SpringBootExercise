@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: root
+    password: 543210
+    url: jdbc:mysql://127.0.0.1:3306/warehouse?useUnicode=ture&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  #  配置加载mapper映射文件
+  mapper-locations: classpath:mybatis/mappers/*.xml
+  #配置mybatis  alias别名
+#  type-aliases-package: com.sky.idea.entity
+  #  配置mybatis主核心配置文件
+  config-location: classpath:mybatis/mybatis-config.xml

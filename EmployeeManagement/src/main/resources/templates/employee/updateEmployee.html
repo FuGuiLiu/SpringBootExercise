@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" type="text/css" media="all">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+    <style type="text/css">
+        /* Chart.js */
+
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+</head>
+
+<body>
+
+<div th:replace="~{common/common::header}"/>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="~{common/common::sidebar(active='employees')}"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <form method="post" th:action="@{/employee/update}">
+                <input type="hidden" th:value="${employee.id}" name="id">
+                <div class="form-group row">
+                    <label for="inputLastName" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:value="${employee.lastName}" name="lastName" class="form-control"
+                               id="inputLastName" placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" th:value="${employee.email}" name="email" class="form-control"
+                               id="inputEmail3" placeholder="Email">
+                    </div>
+                </div>
+
+                <fieldset class="form-group">
+                    <div class="row">
+                        <legend class="col-form-label col-sm-2 pt-0"> 性别</legend>
+                        <div class="col-sm-10">
+                            男
+                            <div class="form-check">
+
+                                <input class="form-check-input" th:checked="${employee.gender==0}" type="radio"
+                                       name="gender" id="gridRadios1"
+                                       value="0">
+                                <label class="form-check-label" for="gridRadios1">
+
+                                </label>
+                            </div>
+                            女
+                            <div class="form-check">
+
+                                <input class="form-check-input" th:checked="${employee.gender==1}" type="radio"
+                                       name="gender" id="gridRadios2"
+                                       value="1">
+                                <label class="form-check-label" for="gridRadios2">
+
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-group row">
+                    <label for="inputDepartment" class="col-sm-2 col-form-label">DepartmentName</label>
+                    <div class="col-sm-10">
+                        <select id="inputDepartment" name="Department.id">
+                            <option th:each="department:${departments}"
+                                    th:text="${department.getDepartmentName()}"
+                                    th:value="${department.getId()}"
+                                    th:selected="${employee.department.id==department.id}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputBirthday" class="col-sm-2 col-form-label">Birthday</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:value="${#dates.format(employee.birth,'yyyy-MM-dd')}" name="birth"
+                               class="form-control"
+                               id="inputBirthday"
+                               placeholder="Birthday example:2020-02-02">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">update</button>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+<!-- Icons -->
+<script type="text/javascript" th:src="@{/js/feather.min.js}"></script>
+<script>
+    feather.replace()
+</script>
+
+<!-- Graphs -->
+<script type="text/javascript" th:src="@{/js/Chart.min.js}"></script>
+<script>
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            datasets: [{
+                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#007bff',
+                borderWidth: 4,
+                pointBackgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            },
+            legend: {
+                display: false,
+            }
+        }
+    });
+</script>
+
+</body>
+
+</html>
