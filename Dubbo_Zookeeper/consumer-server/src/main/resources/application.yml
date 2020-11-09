@@ -1,0 +1,6 @@
+#从消费者那里拿服务就需要暴露自己的名称,及细信息
+dubbo.application.name: consumer-server
+#获取注册中心的资源地址
+dubbo:
+  registry:
+    address: zookeeper://127.0.0.1:2181

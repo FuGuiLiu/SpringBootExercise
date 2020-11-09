@@ -1,0 +1,20 @@
+spring:
+  mail:
+    #    邮箱
+    username: liu997121@gmail.com
+    #    密码
+    password: gg543210.
+    #    配置发送的服务器
+    host: smtp.gmail.com
+    #    是否开启SSL协议安全认证协议
+    properties.mail.smtp.ssl.enable: true
+    #    是否认证ssl证书
+    properties.mail.smtp.auth: true
+    #    配置安全认证协议端口 SSL 端口:465
+    properties.mail.smtp.port: 465
+    #    设置默认字符集 UTF-8 不是必填项
+    default-encoding: utf-8
+    #    properties.mail.display.sendmail: Javen 不是必填项
+    #    properties.mail.display.sendname: Spring Boot Guide Email 不是必填项
+    #    properties.mail.smtp.starttls.enable: true 不是必填项
+    #    properties.mail.smtp.starttls.required: true 不是必填项
